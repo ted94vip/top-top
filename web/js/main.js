@@ -5,14 +5,14 @@
 	speed: 250
 	})
 function showCart(cart){
-	$('#cart.modal-body').html(cart);
+	$('#cart .modal-body').html(cart);
 	$('#cart').modal();
 }
 $('.add-to-cart').on('click',function (e){
 	e.preventDefault();
 	var id= $(this).data('id')
 	$.ajax({
-		url: 'cart/add',
+		url: '/cart/add',
 		data: {id:id},
 		type: 'Get',
 		success: function(res){
