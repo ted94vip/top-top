@@ -316,7 +316,9 @@ Modal::begin([
     'id'=>'cart',
     'footer' => ' <button type="button" class="btn btn-default"
   data-dismiss="modal">Продолжить покупки</button>
-        <button type="button" class="btn btn-primary">Оформить заказ</button>'
+        <button type="button" class="btn btn-primary">Оформить заказ</button>
+        <button type="button" class="btn btn-danger">Очистить карзину</button>'
+
 ]);
 Modal::end();
 ?>
