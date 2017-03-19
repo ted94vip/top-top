@@ -6,7 +6,7 @@
 	})
 function showCart(cart){
 	$('#cart.modal-body').html(cart);
-	$('cart').modal();
+	$('#cart').modal();
 }
 $('.add-to-cart').on('click',function (e){
 	e.preventDefault();
@@ -17,7 +17,7 @@ $('.add-to-cart').on('click',function (e){
 		type: 'Get',
 		success: function(res){
 			if(!res) alert('Ошибка!');
-          console.log(res);
+         // console.log(res);
 			showCart(res);
 		},
 		error: function(){
