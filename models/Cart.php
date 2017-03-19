@@ -29,10 +29,10 @@ class Cart extends ActiveRecord
  }
     public function recalc($id){
         if(!isset($_SESSION['cart'][$id])) return false;
-        $qtyminus = $_SESSION['cart'][$id]['qty'];
-        $summinus = $_SESSION['cart'][$id]['qty']*$_SESSION['cart'][$id]['price'] ;
-        $_SESSION['cart.qty']-=$qtyminus;
-        $_SESSION['cart.sum']-=$summinus;
+        $qtyMinus = $_SESSION['cart'][$id]['qty'];
+        $sumMinus = $_SESSION['cart'][$id]['qty']*$_SESSION['cart'][$id]['price'] ;
+        $_SESSION['cart.qty']-=$qtyMinus;
+        $_SESSION['cart.sum']-=$sumMinus;
         unset($_SESSION['cart'][$id]);
 
     }
