@@ -4,6 +4,10 @@
  $('.catalog').dcAccordion({
 	speed: 250
 	})
+function showCart(cart){
+	$('#cart.modal-body').html(cart);
+	$('cart').modal();
+}
 $('.add-to-cart').on('click',function (e){
 	e.preventDefault();
 	var id= $(this).data('id')
@@ -12,10 +16,12 @@ $('.add-to-cart').on('click',function (e){
 		data: {id:id},
 		type: 'Get',
 		success: function(res){
+			if(!res) alert('Ошибка!');
           console.log(res);
+			showCart(res);
 		},
 		error: function(){
-			alert('error')
+			alert('error');
 		}
 	});
 })
