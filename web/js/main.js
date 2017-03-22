@@ -8,6 +8,38 @@ function showCart(cart){
 	$('#cart .modal-body').html(cart);
 	$('#cart').modal();
 }
+function  getCart(){
+	$.ajax({
+		url: '/cart/show',
+		type: 'Get',
+		success: function(res){
+			if(!res) alert('Ошибка!');
+			showCart(res);
+		},
+		error: function(){
+			alert('error');
+		}
+	});
+	return false;
+}
+$('#cart .modal-body').on('click','.del-item',function(){
+	var id= $(this).data('id')
+	$.ajax({
+		url: '/cart/del-item',
+		data: {id:id},
+		type: 'Get',
+		success: function(res){
+			if(!res) alert('Ошибка!');
+			showCart(res);
+		},
+		error: function(){
+			alert('error');
+		}
+	});
+
+	});
+
+
  function clearCart(){
 	 $.ajax({
 		 url: '/cart/clear',
@@ -23,10 +55,11 @@ function showCart(cart){
  }
 $('.add-to-cart').on('click',function (e){
 	e.preventDefault();
-	var id= $(this).data('id')
+	var id= $(this).data('id'),
+	    qty=$('#qty').val()
 	$.ajax({
 		url: '/cart/add',
-		data: {id:id},
+		data: {id:id, qty:qty},
 		type: 'Get',
 		success: function(res){
 			if(!res) alert('Ошибка!');
