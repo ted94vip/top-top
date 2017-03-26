@@ -37,39 +37,40 @@ $('#cart .modal-body').on('click','.del-item',function(){
 		}
 	});
 
+});
+
+
+function clearCart(){
+	$.ajax({
+		url: '/cart/clear',
+		type: 'Get',
+		success: function(res){
+			if(!res) alert('Ошибка!');
+			showCart(res);
+		},
+		error: function(){
+			alert('error');
+		}
 	});
-
-
- function clearCart(){
-	 $.ajax({
-		 url: '/cart/clear',
-		 type: 'Get',
-		 success: function(res){
-			 if(!res) alert('Ошибка!');
-			 showCart(res);
-		 },
-		 error: function(){
-			 alert('error');
-		 }
-	 });
- }
+}
 $('.add-to-cart').on('click',function (e){
 	e.preventDefault();
 	var id= $(this).data('id'),
-	    qty=$('#qty').val()
+			qty=$('#qty').val()
 	$.ajax({
 		url: '/cart/add',
 		data: {id:id, qty:qty},
 		type: 'Get',
 		success: function(res){
 			if(!res) alert('Ошибка!');
-         	showCart(res);
+			showCart(res);
 		},
 		error: function(){
 			alert('error');
 		}
 	});
 })
+
 
 	var RGBChange = function() {
 	  $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
