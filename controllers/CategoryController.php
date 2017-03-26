@@ -18,8 +18,9 @@ class CategoryController extends AppController
 {
     public function actionIndex(){
        $hits = Product::find()->where(['hit'=>'1'])->limit(6)->all();
+       $recomands = Product::find()->where(['recomanded'=>'1'])->limit(6)->all();
        $this->setMeta('TOP-TOP');
-        return $this -> render('index', compact('hits'));
+        return $this -> render('index', compact('hits','recomands'));
 }
 
     public function actionView($id)
@@ -31,7 +32,6 @@ class CategoryController extends AppController
         $query = Product::find()->where(['category_id'=>$id]);
         $pages= new Pagination(['totalCount'=>$query->count(),'pageSize'=>3,'forcePageParam'=>false,'pageSizeParam'=>false]);
         $products =$query->offset($pages->offset)->limit($pages->limit)->all();
-
         $this->setMeta('TOP-TOP| '. $category->name , $category ->keywords, $category->description);
         return $this->render('view',compact('products','pages','category'));
     }
