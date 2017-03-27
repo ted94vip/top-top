@@ -12,6 +12,7 @@ use app\models\Product;
 use Yii;
 use yii\data\Pagination;
 use yii\web\HttpException;
+use app\models\SignupForm;
 
 
 class CategoryController extends AppController
@@ -35,6 +36,5 @@ class CategoryController extends AppController
         $this->setMeta('TOP-TOP| '. $category->name , $category ->keywords, $category->description);
         return $this->render('view',compact('products','pages','category'));
     }
-
 
 }
