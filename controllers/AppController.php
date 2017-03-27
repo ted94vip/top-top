@@ -19,4 +19,5 @@ protected function setMeta($title =null, $keywords =null,$description =null)
     $this->view->registerMetaTag(['name'=>'keywords', 'content'=>"$keywords"]);
     $this->view->registerMetaTag(['name'=>'description', 'content'=>"$description"]);
 }
+
 }
