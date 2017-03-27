@@ -10,6 +10,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\ltAppAsset;
 use yii\bootstrap\Modal;
+use yii\helpers\Url;
 AppAsset::register($this);
 ltAppAsset::register($this);
 ?>
@@ -55,7 +56,7 @@ ltAppAsset::register($this);
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="<?= \yii\helpers\Url::home()?>"><?= Html::img('@web/images/home/logo.png',['alt'=>'TOP-TOP'])?>
+                        <a href="<?= Url::home()?>"><?= Html::img('@web/images/home/logo.png',['alt'=>'TOP-TOP'])?>
                                                 </a></div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">
@@ -89,6 +90,7 @@ ltAppAsset::register($this);
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
                             <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                            <li><a href="<?=Url::to(['site/signup'])?>"><i class="fa fa-user"></i> Регистрация</a></li>
                         </ul>
                     </div>
                 </div>
@@ -110,14 +112,14 @@ ltAppAsset::register($this);
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a class="active" href="<?= \yii\helpers\Url::home()?>">Главная</a></li>
+                            <li><a class="active" href="<?= Url::home()?>">Главная</a></li>
                             <li class="dropdown"><a href="#">Магазин<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="shop.html">Товары</a></li>
-                                    <li><a href="#" onclick="return getCart()>Корзина</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="#" onclick="return getCart()">Cart</a></li>
+                                    <li><a href="#" onclick="return getCart()">Корзина</a></li>
                                     <li><a href="login.html">Login</a></li>
+
                                 </ul>
                             </li>
                            <li><a href="404.html">Контактные данные</a></li>
@@ -127,7 +129,7 @@ ltAppAsset::register($this);
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
-                        <form method="get" action="<?=\yii\helpers\Url::to(['search/view'])?>" >
+                        <form method="get" action="<?=Url::to(['search/view'])?>" >
                         <input type="text" placeholder="Search" name="q"/>
                         </form>
                     </div>
@@ -219,7 +221,7 @@ Modal::begin([
     'size'=>'modal-lg',
     'footer' => ' <button type="button" class="btn btn-default"
   data-dismiss="modal">Продолжить покупки</button>
-        <a href="'. \yii\helpers\Url::to(['cart/view']).'" type="button" class="btn btn-success">Оформить заказ</a>
+        <a href="'. Url::to(['cart/view']).'" type="button" class="btn btn-success">Оформить заказ</a>
         <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>'
 
 ]);
