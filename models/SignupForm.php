@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 
+use yii\db\ActiveRecord;
+
 /**
  * This is the model class for table "user".
  *
@@ -22,33 +24,37 @@ use yii\base\Model;
  */
 class SignupForm extends Model
 {
-    public $login;
+    public $username;
     public $email;
     public $password;
+    public $name;
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function  tableName()
     {
         return 'user';
     }
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [[ 'email', 'login',  'password' ], 'required'],
-            [['login','email'], 'trim'],
-            [['login'], 'string', 'min' => 2, 'max' => 255],
-            [['status', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'email', 'address'], 'string', 'max' => 255],
-            [['email'], 'unique', 'targetClass' => '\app\models\User', 'message' => 'Этот адрес электронной почты уже используется!!!.'],
-            [['email'], 'email'],
-            [['password'], 'string', 'length' => [6,12],'message' => 'Пароль должен быть от 6 до 12 символов'],
-            [['login'], 'unique', 'targetClass' => '\app\models\User', 'message' => 'Это имя уже используется!!!'],
-                    ];
+            ['username', 'trim'],
+            ['username', 'required'],
+            ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'Этот имя уже используется!!!.'],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+            ['email', 'trim'],
+            ['name', 'trim'],
+            ['name', 'required'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique', 'targetClass' => '\app\models\User', 'message' => 'Этот адрес электронной почты уже используется!!!'],
+            ['password', 'required'],
+            ['password', 'string', 'length' => [6,12],'message' => 'Пароль должен быть от 6 до 12 символов'],
+            ];
     }
     public function signup()
     {
@@ -58,7 +64,8 @@ class SignupForm extends Model
         }
 
         $user = new User();
-        $user->login = $this->login;
+        $user->username = $this->username;
+        $user->name = $this->name;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
@@ -67,20 +74,16 @@ class SignupForm extends Model
     /**
      * @inheritdoc
      */
-   /* public function attributeLabels()
+    public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
+
+            'name' => 'Имя',
             'email' => 'Email',
-            'login' => 'Login',
-            'address' => 'Address',
-            'auth_key' => 'Auth Key',
-            'password' => 'Password',
-            'status' => 'Status',
-            'paassword_reset_token' => 'Paassword Reset Token',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'username' => 'Логин',
+            'address' => 'Адрес',
+            'password' => 'Пароль',
+
         ];
-    }*/
+    }
 }
