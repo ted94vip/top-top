@@ -27,7 +27,7 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password','email'], 'required'],
+            [[ 'email','password'], 'required'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             [['email'], 'email'],
@@ -49,7 +49,7 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, 'Неверный логин или пароль!');
             }
         }
     }
@@ -61,11 +61,18 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
+            if($this->rememberMe)
+            {$u=$this->getUser();
+            $u->generateAuthKey();
+            $u->save();}
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         }
         return false;
     }
-
+    public static function  tableName()
+    {
+        return 'user';
+    }
     /**
      * Finds user by [[username]]
      *
@@ -78,5 +85,16 @@ class LoginForm extends Model
         }
 
         return $this->_user;
+    }
+    public function attributeLabels()
+    {
+        return [
+
+
+            'email' => 'Email',
+            'password' => 'Пароль',
+            'rememberMe'=>'Запомнить меня',
+
+        ];
     }
 }
