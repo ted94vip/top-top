@@ -85,11 +85,13 @@ ltAppAsset::register($this);
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+                           <?php if(!Yii::$app->user ->isGuest):?>
+                            <li><a href="#"><i class="fa fa-user"></i> <?= Yii::$app->user->identity['name']?> </a></li>
+                               <li><a href="<?=Url::to(['site/logout'])?>"><i class="fa fa-crosshairs"></i> Выход</a></li>
+                           <?php endif;?>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
-                            <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                             <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+                            <li><a href="<?= Url::to(['/admin'])?>"><i class="fa fa-lock"></i> Вход</a></li>
                             <li><a href="<?=Url::to(['site/signup'])?>"><i class="fa fa-user"></i> Регистрация</a></li>
                         </ul>
                     </div>
@@ -118,7 +120,7 @@ ltAppAsset::register($this);
                                     <li><a href="shop.html">Товары</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <li><a href="#" onclick="return getCart()">Корзина</a></li>
-                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="<?= Url::to(['/admin'])?>">Вход</a></li>
 
                                 </ul>
                             </li>
@@ -130,7 +132,7 @@ ltAppAsset::register($this);
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
                         <form method="get" action="<?=Url::to(['search/view'])?>" >
-                        <input type="text" placeholder="Search" name="q"/>
+                        <input type="text" placeholder="Поиск" name="q"/>
                         </form>
                     </div>
                 </div>
